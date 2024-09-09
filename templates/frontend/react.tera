@@ -1,0 +1,9 @@
+{
+  "name": "React Project",
+  "description": "A React project setup",
+  "files": {
+    "src/App.js": "import React from 'react';\n\nfunction App() {\n  return <div>Hello, React!</div>;\n}\n\nexport default App;\n",
+    "src/index.js": "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport App from './App';\n\nReactDOM.render(<App />, document.getElementById('root'));\n",
+    "public/index.html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>React App</title>\n</head>\n<body>\n  <div id=\"root\"></div>\n</body>\n</html>\n"
+  }
+}

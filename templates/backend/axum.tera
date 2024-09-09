@@ -1,0 +1,7 @@
+{
+  "name": "Axum Project",
+  "description": "An Axum project setup",
+  "files": {
+    "src/main.rs": "use axum::{routing::get, Router};\n\nasync fn hello() -> &'static str {\n  \"Hello, Axum!\"\n}\n\n#[tokio::main]\nasync fn main() {\n  let app = Router::new().route(\"/\", get(hello));\n  axum::Server::bind(&\"0.0.0.0:3000\".parse().unwrap())\n    .serve(app.into_make_service())\n    .await\n    .unwrap();\n}\n"
+  }
+}
