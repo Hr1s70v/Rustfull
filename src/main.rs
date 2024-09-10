@@ -1,4 +1,5 @@
 mod cli;
+mod templating;
 
 
 fn main() {
