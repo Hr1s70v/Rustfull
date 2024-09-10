@@ -9,6 +9,7 @@ dependencies = [
  "cliclack",
  "colored",
  "console",
+ "serde",
  "tera",
 ]
 
