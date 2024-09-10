@@ -1,7 +1,9 @@
 use cliclack::{input, select, multi_progress, confirm, intro, set_theme, Theme, ThemeState};
 use std::error::Error;
 use colored::*;
-use console::{Style, style}; // Ensure this is the correct import for console::Style
+use console::{Style, style};
+use std::{thread, time};
+use crate::templating::template_rendering;
 
 struct BlueTheme;
 
@@ -28,7 +30,7 @@ pub fn user_input() -> Result<(), Box<dyn Error>> {
     let multi = multi_progress(" ");
     intro(style(" SETUP ").on_cyan().black())?;
     // Get project name from user
-    let project_name: String = input("What will your project be called? (my-rustfull-app)")
+    let project_name: String = input("What will your project be called?")
         .placeholder("my-rustfull-app")
         .validate(|name: &String| {
             if name.is_empty() {
@@ -77,7 +79,7 @@ pub fn user_input() -> Result<(), Box<dyn Error>> {
     // Display selected frontend framework
 
     let backend_framework = select("Which framework will you use for your backend?")
-        .item("Actix Web", "Actix Web", "")
+        .item("actix", "Actix ", "")
         .item("Rocket", "Rocket", "")
         .item("Axum", "Axum", "")
         .item("Warp", "Warp", "")
@@ -152,6 +154,8 @@ pub fn user_input() -> Result<(), Box<dyn Error>> {
         "no" => "Do Not Run",
         _ => "Unknown",
     };
+    let sleep = time::Duration::from_millis(1000);
+    thread::sleep(sleep);
 
     // Display collected information with color
     println!("\nProject Setup Summary:");
@@ -172,6 +176,8 @@ pub fn user_input() -> Result<(), Box<dyn Error>> {
     if !should_continue {
         println!("Exiting setup.");
         return Ok(()); // Exit if user does not want to continue
+    } else {
+        template_rendering(&project_name, &frontend_framework, &backend_framework);
     }
 
     // Stop the progress bar
